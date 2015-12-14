@@ -15,7 +15,9 @@ Written in [golang](https://golang.org/), it can be compiled for most major plat
 
 The supplied Dockerfile can be used to wrap the webby binary in a docker image -- for distribution/exection into the Docker ecosystem.
 
-The resulting docker image is <7 Mb...so, you should be able to run 100 (or 1000s) of Webby
+The resulting docker image is <7 Mb...so, you should be able to run 100s (or 1000s!) of copies of Webby
+
+WEBBY ALL THE THINGS!
 
 # Roadmap
 * TBD
