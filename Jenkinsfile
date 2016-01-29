@@ -8,9 +8,6 @@ node {
 
   sh "docker run --rm -v `pwd`:/usr/src/${image} -w /usr/src/${image} golang:latest make ${image}"
 
-sh 'pwd'
-sh 'ls -al'
-
   stash name: 'binary', includes: 'webby'
 }
 
@@ -23,7 +20,7 @@ node {
   removeRunningContainers()
 
   try {
-    sh 'docker build .'
+    sh 'docker build -t ${image} .'
   } catch (all) {
     echo 'Output from app container'
     sh 'docker logs crawler'
