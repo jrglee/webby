@@ -6,9 +6,12 @@ stage 'Golang build'
 node {
   checkout scm
 
-  sh 'docker run --rm -v "$PWD":/usr/src/myapp -w /usr/src/myapp golang:latest make all'
+  sh 'docker run --rm -v "$PWD":/usr/src/myapp -w /usr/src/myapp golang:latest make ${image}'
 
-  stash name: 'binary', includes: 'webby'
+sh 'pwd'
+sh 'ls -al'
+
+  stash name: 'binary', includes: 'build/webby'
 }
 
 stage 'Docker build and push'
