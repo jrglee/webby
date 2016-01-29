@@ -6,7 +6,7 @@ stage 'Golang build'
 node {
   checkout scm
 
-  sh 'make all'
+  sh 'docker run --rm -v "$PWD":/usr/src/myapp -w /usr/src/myapp golang:latest make all'
 
   stash name: 'binary', includes: 'webby'
 }
