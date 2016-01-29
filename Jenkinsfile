@@ -20,7 +20,7 @@ node {
   removeRunningContainers()
 
   try {
-    sh 'docker build -t ${image} .'
+    sh "docker build -t ${image} ."
   } catch (all) {
     echo 'Output from app container'
     sh 'docker logs crawler'
