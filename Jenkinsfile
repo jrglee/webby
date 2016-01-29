@@ -11,7 +11,7 @@ node {
 sh 'pwd'
 sh 'ls -al'
 
-  stash name: 'binary', includes: 'build/webby'
+  stash name: 'binary', includes: 'webby'
 }
 
 stage 'Docker build and push'
