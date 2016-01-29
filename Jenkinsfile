@@ -6,7 +6,7 @@ stage 'Golang build'
 node {
   checkout scm
 
-  sh 'docker run --rm -v "$PWD":/usr/src/${image} -w /usr/src/${image} golang:latest make ${image}'
+  sh "docker run --rm -v $PWD:/usr/src/${image} -w /usr/src/${image} golang:latest make ${image}"
 
 sh 'pwd'
 sh 'ls -al'
