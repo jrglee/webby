@@ -1,4 +1,4 @@
-FROM scratch
+FROM debian:jessie
 ADD webby /
 EXPOSE 8080
-ENTRYPOINT ["/webby"]
+CMD ["/webby"]

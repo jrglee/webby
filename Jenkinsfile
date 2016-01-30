@@ -6,7 +6,7 @@ stage 'Golang build'
 node {
   checkout scm
 
-  sh "docker run --rm -v `pwd`:/usr/src/${image} -w /usr/src/${image} golang:latest make ${image}"
+  sh "docker run --rm -v `pwd`:/usr/src/${image} -w /usr/src/${image} golang:1.5 make ${image}"
 
   stash name: 'binary', includes: 'webby'
 }
@@ -17,17 +17,7 @@ node {
 
   unstash 'binary'
 
-  removeRunningContainers()
-
-  try {
-    sh "docker build -t ${name} ."
-  } catch (all) {
-    echo 'Output from app container'
-    sh 'docker logs crawler'
-
-    removeRunningContainers()
-    throw all
-  }
+  sh "docker build -t ${name} ."
 
   sh "git log -1 | head -1 | cut -c 8-10 > git-revision"
   def revision = readFile 'git-revision'
@@ -38,13 +28,6 @@ node {
   def tag = "${name}:${version}"
   sh "docker tag -f ${name} ${tag}"
   sh "docker push ${tag}"
+  sh "docker push ${name}"
 }
 
-def removeRunningContainers() {
-  echo 'Remove cleaning containers'
-  try {
-    sh 'docker rm -f -v `docker ps -aq`'
-  } catch(all) {
-    echo 'No containers to remove'
-  }
-}
