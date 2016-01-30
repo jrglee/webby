@@ -20,7 +20,7 @@ node {
   removeRunningContainers()
 
   try {
-    sh "docker build -t ${image} ."
+    sh "docker build -t ${name} ."
   } catch (all) {
     echo 'Output from app container'
     sh 'docker logs crawler'
@@ -33,11 +33,10 @@ node {
   def revision = readFile 'git-revision'
   def version = "1.0.${env.BUILD_NUMBER ?: 0}.${revision ?: 1}"
 
-  sh "docker tag -f ${image} ${name}"
   sh "docker push ${name}"
 
   def tag = "${name}:${version}"
-  sh "docker tag -f ${image} ${tag}"
+  sh "docker tag -f ${name} ${tag}"
   sh "docker push ${tag}"
 }
 
