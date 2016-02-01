@@ -28,6 +28,5 @@ node {
   def tag = "${name}:${version}"
   sh "docker tag -f ${name} ${tag}"
   sh "docker push ${tag}"
-  sh "docker push ${name}"
 }
 
